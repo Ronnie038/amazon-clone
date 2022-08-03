@@ -1,0 +1,22 @@
+.order {
+	padding: 3rem;
+	margin: 20px 0;
+	border: 1px solid lightgray;
+	background-color: white;
+	position: relative;
+}
+
+.order__id {
+	position: absolute;
+	right: 30px;
+	top: 3rem;
+}
+
+.order_1 {
+	margin-left: 3rem;
+}
+
+.order_total {
+	position: absolute;
+	right: 40px;
+}

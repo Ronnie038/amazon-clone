@@ -1,16 +1,16 @@
 import React from 'react';
-
 import './Checkout.css';
 import { useStateValue } from './StateProvider';
 import Subtotal from './Subtotal';
-
 import CheckoutProduct from './CheckoutProduct';
+import Flip from 'react-flip-move';
 
 const Checkout = () => {
-	const [{ basket }, dispatch] = useStateValue();
-	basket.map((item) => {
-		return console.log(item.image);
-	});
+	const [{ basket, user }, dispatch] = useStateValue();
+	const ticketNotVisibleState = {
+		transform: 'translateX(-100%)',
+		opacity: 0.1,
+	};
 
 	return (
 		<div className='checkout'>
@@ -22,6 +22,7 @@ const Checkout = () => {
 						alt=''
 					/>
 					<div className=''>
+						<h3>HELLO {user?.email}</h3>
 						<h2 className='checkout__title'>Your Shopping Basket</h2>
 						{basket.map((item) => (
 							<CheckoutProduct

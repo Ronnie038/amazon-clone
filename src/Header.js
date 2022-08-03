@@ -4,9 +4,18 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { NavLink } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
+import { signOut } from 'firebase/auth';
+import { auth } from './firebase';
 
 const Header = () => {
-	const [{ basket }, dispatch] = useStateValue();
+	const [{ basket, user }, dispatch] = useStateValue();
+
+	const handleAuthentication = () => {
+		if (user) {
+			signOut(auth);
+		}
+	};
+
 	return (
 		<div className='header'>
 			<NavLink to='/'>
@@ -23,16 +32,23 @@ const Header = () => {
 			</div>
 
 			<div className='header__nav'>
-				<NavLink to='header'>
-					<div className='header__option'>
-						<span className='header__optionLineOne'>Hello Guest</span>
-						<span className='header__optionLineTwo'>Sign in</span>
+				<NavLink to={!user && 'login'}>
+					<div onClick={handleAuthentication} className='header__option'>
+						<span className='header__optionLineOne'>
+							Hello {user ? user.email : ' Guest'}
+						</span>
+
+						<span className='header__optionLineTwo'>
+							{user ? 'Sign out' : 'Sign in'}
+						</span>
 					</div>
 				</NavLink>
-				<div className='header__option'>
-					<span className='header__optionLineOne'>Return </span>
-					<span className='header__optionLineTwo'>& Orders</span>
-				</div>
+				<NavLink to='orders'>
+					<div className='header__option'>
+						<span className='header__optionLineOne'>Return </span>
+						<span className='header__optionLineTwo'>& Orders</span>
+					</div>
+				</NavLink>
 				<div className='header__option'>
 					<span className='header__optionLineOne'>Your </span>
 					<span className='header__optionLineTwo'>Prime</span>
