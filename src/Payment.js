@@ -5,12 +5,10 @@ import CheckoutProduct from './CheckoutProduct';
 import { useStateValue } from './StateProvider';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { getBasketTotal } from './reducer';
-import { endBefore } from 'firebase/firestore';
 import CrrencyFormat from 'react-currency-format';
-import { async } from '@firebase/util';
 import axios from './axios';
 import { db } from './firebase';
-import { collection, setDoc, addDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 
 const Payment = () => {
 	const navigate = useNavigate();
